@@ -37,6 +37,10 @@ hostname -I
 
 
 ----For I2C Temperature---- (http://www.instructables.com/id/Raspberry-Pi-I2C-Python/?ALLSTEPS)
+sudo raspi-config
+
+8-A7-YES-YES
+
 sudo apt-get update
 sudo apt-get install i2c-tools
 sudo apt-get install python-smbus
