@@ -33,3 +33,16 @@ sudo pip install flask
 
 ----To find IP Address---
 hostname -I
+
+
+
+----For I2C Temperature---- (http://www.instructables.com/id/Raspberry-Pi-I2C-Python/?ALLSTEPS)
+sudo apt-get update
+sudo apt-get install i2c-tools
+sudo apt-get install python-smbus
+
+sudo adduser pi i2c
+sudo reboot
+
+To View I2c Channels:
+i2cdetect -y 0
