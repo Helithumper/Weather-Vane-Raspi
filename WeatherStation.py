@@ -11,9 +11,10 @@ curs = db.cursor();
 i = 0
 
 def main():
+    j=0
     print(strftime("%a, %d %b %Y %H:%M:%S",gmtime()))
     while 1:
-        if i%5==0:
+        if j%5==0:
             db = MySQLdb.connect(host='localhost',user='monitor',passwd='password',db='weather');
             curs = db.cursor()
 
@@ -27,7 +28,7 @@ def main():
             for reading in curs.fetchall():
                 print str(reading[0])+"	"+str(reading[1])+" 	"+"    " + reading[2]+"  	"+str(reading[3])
             db.close();
-    i=i+1
+    j=j+1
 #@app.route('/')
 #def index():
 #    return strftime("%a, %d %b %Y %H:%M:%S",gmtime())
