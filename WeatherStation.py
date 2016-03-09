@@ -46,8 +46,8 @@ def loopedFunction():
         b = randint(0,100)
         c = randint(0,100)
         with db:
-            curs.execute ("""INSERT INTO weatherdata
-                    values(CURRENT_DATE(),NOW(),{},{},{})""",(a,b,c))
+            query = """INSERT INTO weatherdata values(CURRENT_DATE(),NOW(),{},{},{})""".format(a,b,c))
+            curs.execute (query)
         curs.execute ("SELECT * FROM weatherdata ORDER BY tdate DESC LIMIT 1")
 
         for reading in curs.fetchall():
