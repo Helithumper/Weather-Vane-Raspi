@@ -44,7 +44,7 @@ def loopedFunction():
         with db:
             curs.execute ("""INSERT INTO weatherdata
                     values(CURRENT_DATE(),NOW(),0,0,0)""")
-        curs.execute ("SELECT LAST FROM weatherdata")
+        curs.execute ("SELECT LAST FROM weatherdata ORDER BY tdate DESC LIMIT 1")
 
         for reading in curs.fetchall():
             print str(reading[0])+"	"+str(reading[1])+"     " + str(reading[2])+"  	"+str(reading[3])+"  	"+str(reading[4])
