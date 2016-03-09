@@ -1,6 +1,6 @@
 import MySQLdb
 from time import *
-from flask import flask
+from flask import Flask
 app = Flask(_name_);
 
 
@@ -27,7 +27,7 @@ def main():
             for reading in curs.fetchall():
                 print str(reading[0])+"	"+str(reading[1])+" 	"+"    " + reading[2]+"  	"+str(reading[3])
             db.close();
-            
+
 @app.route('/')
 def index():
     return strftime("%a, %d %b %Y %H:%M:%S",gmtime())
