@@ -1,6 +1,6 @@
 import MySQLdb
 from time import *
-from random import randint
+from random import *
 import threading
 #from flask import Flask
 #app = Flask(__name__);
