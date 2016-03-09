@@ -1,5 +1,6 @@
 import MySQLdb
 from time import *
+from random import randint
 import threading
 #from flask import Flask
 #app = Flask(__name__);
@@ -41,9 +42,12 @@ def loopedFunction():
 
         #print("5 Seconds have passed")
         print(strftime("%a, %d %b %Y %H:%M:%S",gmtime()))
+        a = randInt(0,100)
+        b = randInt(0,100)
+        c = randInt(0,100)
         with db:
             curs.execute ("""INSERT INTO weatherdata
-                    values(CURRENT_DATE(),NOW(),0,0,0)""")
+                    values(CURRENT_DATE(),NOW(),a,b,c""")
         curs.execute ("SELECT * FROM weatherdata ORDER BY tdate DESC LIMIT 1")
 
         for reading in curs.fetchall():
