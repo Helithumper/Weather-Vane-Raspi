@@ -32,7 +32,7 @@ def main():
 def index():
     return strftime("%a, %d %b %Y %H:%M:%S",gmtime())
 
-if _name_ == '_main_':
+if __name__ == '__main__':
     app.run(debug=True,host='0.0.0.0')
 
 main();
