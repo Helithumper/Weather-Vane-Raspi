@@ -3,7 +3,7 @@ from time import *
 from flask import flask
 app = Flask(_name_);
 
-@app.route('/')
+
 
 db = MySQLdb.connect(host='localhost',user='monitor',passwd='password',db='weather');
 curs = db.cursor();
@@ -27,6 +27,8 @@ def main():
             for reading in curs.fetchall():
                 print str(reading[0])+"	"+str(reading[1])+" 	"+"    " + reading[2]+"  	"+str(reading[3])
             db.close();
+            
+@app.route('/')
 def index():
     return strftime("%a, %d %b %Y %H:%M:%S",gmtime())
 
