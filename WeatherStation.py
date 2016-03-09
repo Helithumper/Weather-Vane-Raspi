@@ -5,7 +5,7 @@ app = Flask(_name_)
 
 @app.route('/')
 
-db = MySQLdb.connect('localhost','monitor','password','weather')
+db = MySQLdb.connect(host='localhost',user='monitor',passwd='password',db='weather')
 curs = db.cursor()
 
 secondsCursor = time.time()
