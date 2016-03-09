@@ -3,7 +3,7 @@ from time import *
 from flask import flask
 app = Flask(_name_);
 
-@app.route('/');
+@app.route('/')
 
 db = MySQLdb.connect(host='localhost',user='monitor',passwd='password',db='weather');
 curs = db.cursor();
