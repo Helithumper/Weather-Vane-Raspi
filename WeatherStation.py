@@ -11,6 +11,7 @@ curs = db.cursor();
 i = 0
 
 def main():
+    print("hi")
     j=0
     print(strftime("%a, %d %b %Y %H:%M:%S",gmtime()))
     while 1:
@@ -26,7 +27,7 @@ def main():
             curs.execute ("SELECT * FROM weatherdata")
 
             for reading in curs.fetchall():
-                print str(reading[0])+"	"+str(reading[1])+" 	"+"    " + reading[2]+"  	"+str(reading[3])
+                print str(reading[0])+"	"+str(reading[1])+"     " + str(reading[2])+"  	"+str(reading[3])
             db.close();
     j=j+1
 #@app.route('/')
