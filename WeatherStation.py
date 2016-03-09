@@ -13,7 +13,7 @@ i = 0
 def main():
     print(strftime("%a, %d %b %Y %H:%M:%S",gmtime()))
     while 1:
-        if i%5=0:
+        if i%5==0:
             db = MySQLdb.connect("localhost","monitor","password","temps")
             curs = db.cursor()
 
