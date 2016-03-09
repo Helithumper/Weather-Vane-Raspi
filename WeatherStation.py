@@ -42,9 +42,9 @@ def loopedFunction():
 
         #print("5 Seconds have passed")
         print(strftime("%a, %d %b %Y %H:%M:%S",gmtime()))
-        a = random.randInt(0,100)
-        b = random.randInt(0,100)
-        c = random.randInt(0,100)
+        a = randint(0,100)
+        b = randint(0,100)
+        c = randint(0,100)
         with db:
             curs.execute ("""INSERT INTO weatherdata
                     values(CURRENT_DATE(),NOW(),a,b,c""")
