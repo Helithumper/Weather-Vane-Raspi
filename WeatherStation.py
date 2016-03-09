@@ -47,7 +47,7 @@ def loopedFunction():
         curs.execute ("SELECT * FROM weatherdata ORDER BY tdate DESC LIMIT 1")
 
         for reading in curs.fetchall():
-            print str(reading[0])+"	"+str(reading[1])+"     " + str(reading[2])+"  	"+str(reading[3])+"  	"+str(reading[4])
+            print str(reading[0])+"    "+str(reading[1])+"    " + str(reading[2])+"    "+str(reading[3])+"    "+str(reading[4])
 
         db.close();
         j=j+1
