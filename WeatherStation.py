@@ -11,7 +11,7 @@ import smbus
 db = MySQLdb.connect(host='localhost',user='monitor',passwd='password',db='weather');
 curs = db.cursor();
 
-bus = smbus.SMBus(0)
+bus = smbus.SMBus(1)
 address = 0x48
 
 i = 0
