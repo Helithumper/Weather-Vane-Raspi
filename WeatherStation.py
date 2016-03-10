@@ -52,11 +52,12 @@ def loopedFunction():
 
         #print("5 Seconds have passed")
         #print(strftime("%a, %d %b %Y %H:%M:%S",gmtime()))
-        alpha = getTemp()
-        print alpha
-        b = randint(0,100)
-        c = randint(0,100)
+
         with db:
+            alpha = getTemp()
+            print alpha
+            b = randint(0,100)
+            c = randint(0,100)
             query = """INSERT INTO weatherdata values(CURRENT_DATE(),NOW(),{},{},{})""".format(alpha,b,c)
             curs.execute (query)
         curs.execute ("SELECT * FROM weatherdata ORDER BY tdate DESC LIMIT 1")
