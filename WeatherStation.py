@@ -14,7 +14,6 @@ curs = db.cursor();
 bus = smbus.SMBus(1)
 address = 0x48
 
-i = 0
 def getTemp():
     readout = bus.read_byte(address)
     #print(readout)
@@ -22,51 +21,26 @@ def getTemp():
         readout=(readout-128)*-1
     return readout
 
-def main():
-    print("hi")
-    j=0
-    print(strftime("%a, %d %b %Y %H:%M:%S",gmtime()))
-    while 1:
-        if j%5==0:
-            db = MySQLdb.connect(host='localhost',user='monitor',passwd='password',db='weather');
-            curs = db.cursor()
-
-            print("5 Seconds have passed")
-            print(strftime("%a, %d %b %Y %H:%M:%S",gmtime()))
-            with db:
-                curs.execute ("""INSERT INTO weatherdata
-                        values(CURRENT_DATE(),NOW(),0,0,0)""")
-            curs.execute ("SELECT * FROM weatherdata")
-
-            for reading in curs.fetchall():
-                print str(reading[0])+"	"+str(reading[1])+"     " + str(reading[2])+"  	"+str(reading[3])+"  	"+str(reading[4])
-            db.close();
-    j=j+1
-
 def loopedFunction():
     threading.Timer(2.0, loopedFunction).start()
-    j=0
-    if j%5==0:
-        db = MySQLdb.connect(host='localhost',user='monitor',passwd='password',db='weather');
-        curs = db.cursor()
 
-        #print("5 Seconds have passed")
-        #print(strftime("%a, %d %b %Y %H:%M:%S",gmtime()))
+    db = MySQLdb.connect(host='localhost',user='monitor',passwd='password',db='weather');
+    curs = db.cursor()
 
-        with db:
-            alpha = getTemp()
-            #print alpha
-            b = randint(0,100)
-            c = randint(0,100)
-            query = """INSERT INTO weatherdata values(CURRENT_DATE(),NOW(),{},{},{})""".format(getTemp(),b,c)
-            curs.execute (query)
-        curs.execute ("SELECT * FROM weatherdata ORDER BY tdate,ttime DESC LIMIT 1")
+    with db:
+        alpha = getTemp()
+        b = randint(0,100)
+        c = randint(0,100)
+        query = """INSERT INTO weatherdata values(CURRENT_DATE(),NOW(),{},{},{})""".format(getTemp(),b,c)
+        curs.execute (query)
+    curs.execute ("SELECT * FROM weatherdata ORDER BY tdate,ttime DESC LIMIT 1")
 
-        for reading in curs.fetchall():
-            print str(reading[0])+"    "+str(reading[1])+"    " + str(reading[2])+"    "+str(reading[3])+"    "+str(reading[4])
+    for reading in curs.fetchall():
+        print str(reading[0])+"    "+str(reading[1])+"    " + str(reading[2])+"    "+str(reading[3])+"    "+str(reading[4])
 
-        db.close();
-        j=j+1
+    db.close();
+
+
 #@app.route('/')
 #def index():
 #    return strftime("%a, %d %b %Y %H:%M:%S",gmtime())
