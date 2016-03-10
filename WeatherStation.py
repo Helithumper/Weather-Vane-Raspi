@@ -17,7 +17,7 @@ address = 0x48
 i = 0
 def getTemp():
     readout = bus.read_byte(address)
-    print(readout)
+    #print(readout)
     if readout>=128:
         readout=(readout-128)*-1
     return readout
@@ -55,7 +55,7 @@ def loopedFunction():
 
         with db:
             alpha = getTemp()
-            print alpha
+            #print alpha
             b = randint(0,100)
             c = randint(0,100)
             query = """INSERT INTO weatherdata values(CURRENT_DATE(),NOW(),{},{},{})""".format(getTemp(),b,c)
@@ -73,6 +73,7 @@ def loopedFunction():
 #
 #if __name__ == '__main__':
 #    app.run(debug=True,host='0.0.0.0')
+
 
 loopedFunction()
 db.close();
