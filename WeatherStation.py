@@ -60,7 +60,7 @@ def loopedFunction():
             c = randint(0,100)
             query = """INSERT INTO weatherdata values(CURRENT_DATE(),NOW(),{},{},{})""".format(getTemp(),b,c)
             curs.execute (query)
-        curs.execute ("SELECT * FROM weatherdata ORDER BY tdate DESC LIMIT 1")
+        curs.execute ("SELECT * FROM weatherdata ORDER BY tdate,ttime DESC LIMIT 1")
 
         for reading in curs.fetchall():
             print str(reading[0])+"    "+str(reading[1])+"    " + str(reading[2])+"    "+str(reading[3])+"    "+str(reading[4])
