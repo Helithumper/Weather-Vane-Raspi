@@ -18,11 +18,10 @@ i = 0
 def getTemp():
     readout = bus.read_byte(address)
     print(readout)
-    temperature = int(readout,2)
-    if temperature>=128:
-        temperature=(temperature-128)*-1
-    print(temperature)
-    return temperature
+    if readout>=128:
+        readout=(readout-128)*-1
+    return readout
+    
 def main():
     print("hi")
     j=0
