@@ -21,7 +21,7 @@ def getTemp():
     if readout>=128:
         readout=(readout-128)*-1
     return readout
-    
+
 def main():
     print("hi")
     j=0
@@ -53,6 +53,7 @@ def loopedFunction():
         #print("5 Seconds have passed")
         print(strftime("%a, %d %b %Y %H:%M:%S",gmtime()))
         a = getTemp()
+        print a
         b = randint(0,100)
         c = randint(0,100)
         with db:
