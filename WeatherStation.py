@@ -2,6 +2,7 @@ import MySQLdb
 from time import *
 from random import *
 import threading
+import smbus
 #from flask import Flask
 #app = Flask(__name__);
 
@@ -10,8 +11,18 @@ import threading
 db = MySQLdb.connect(host='localhost',user='monitor',passwd='password',db='weather');
 curs = db.cursor();
 
-i = 0
+bus = smbus.SMBus(0)
+address = 0x48
 
+i = 0
+def getTemp():
+    readout = bus.read_byte(address)
+    print(readout)
+    temperature = int(readout,2)
+    if temperature>=128:
+        temperature=(temperature-128)*-1
+    print(temperature)
+    return temperature
 def main():
     print("hi")
     j=0
@@ -42,7 +53,7 @@ def loopedFunction():
 
         #print("5 Seconds have passed")
         print(strftime("%a, %d %b %Y %H:%M:%S",gmtime()))
-        a = randint(0,100)
+        a = getTemp()
         b = randint(0,100)
         c = randint(0,100)
         with db:
