@@ -88,8 +88,8 @@ def loopedFunction():
 
     with db:
         alpha = getTemp()
-        b = randint(0,100)
-        c = randint(0,100)
+        b = getWindSpeed()
+        c = getPressure()
         query = """INSERT INTO weatherdata values(CURRENT_DATE(),NOW(),{},{},{})""".format(getTemp(),b,c)
         curs.execute (query)
     curs.execute ("SELECT * FROM weatherdata ORDER BY tdate,ttime DESC LIMIT 1")
