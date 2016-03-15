@@ -50,3 +50,5 @@ sudo reboot
 
 To View I2c Channels:
 i2cdetect -y 0
+
+-------FOR I2C BARO-----------(https://learn.adafruit.com/downloads/pdf/using-the-bmp085-with-raspberry-pi.pdf)
