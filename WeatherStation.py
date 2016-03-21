@@ -17,7 +17,7 @@ db = MySQLdb.connect(host='localhost',user='monitor',passwd='password',db='weath
 curs = db.cursor();
 
 bus = smbus.SMBus(1)
-address = 0x77
+address = 0x48
 
 SPICLK = 18
 SPIMISO = 23
