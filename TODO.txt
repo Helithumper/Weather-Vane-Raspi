@@ -52,8 +52,13 @@ To View I2c Channels:
 i2cdetect -y 0
 
 -------FOR I2C BARO-----------(https://learn.adafruit.com/downloads/pdf/using-the-bmp085-with-raspberry-pi.pdf)
+https://learn.adafruit.com/using-the-bmp085-with-raspberry-pi/using-the-adafruit-bmp-python-library
 sudo apt-get update
 sudo apt-get install git build-essential python-dev python-smbus
 git clone https://github.com/adafruit/Adafruit_Python_BMP.git
 cd Adafruit_Python_BMP
 sudo python setup.py install
+
+Also, I can use a different Constructor:
+
+def__init__(self,address,bus=smbus.SMBus(1),debug=False);
