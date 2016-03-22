@@ -10,8 +10,8 @@ GPIO.setmode(GPIO.BCM)
 #from flask import Flask
 #app = Flask(__name__);
 
-sensor = BMP085.BMP085(0x60, bus=SMBus(1), mode = BMP085.BMP085_STANDARD);
-
+#sensor = BMP085.BMP085(0x60, bus=SMBus(1), mode = BMP085.BMP085_STANDARD);
+sensor = BMP085.BMP085();
 
 db = MySQLdb.connect(host='localhost',user='monitor',passwd='password',db='weather');
 curs = db.cursor();
