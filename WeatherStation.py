@@ -4,7 +4,7 @@ from random import *
 import threading
 import smbus
 import RPi.GPIO as GPIO
-import Adafruit_BMP.BMP085 as BMP085
+import Adafruit_BMP085 as BMP085
 
 GPIO.setmode(GPIO.BCM)
 #from flask import Flask
@@ -83,7 +83,7 @@ def getPressure():
 def loopedFunction():
     threading.Timer(2.0, loopedFunction).start()
 
-    db = MySQLdb.connect(host='localhost',user='monitor',passwd='password',db='weather');
+    db = MySQLdb.connect(host='45.55.180.111:3306',user='peyton',passwd='toor',db='weather');
     curs = db.cursor()
 
     with db:
