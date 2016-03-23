@@ -4,14 +4,14 @@ from random import *
 import threading
 import smbus
 import RPi.GPIO as GPIO
-import Adafruit_BMP085 as BMP085
+#import Adafruit_BMP.BMP085 as BMP085
 
 GPIO.setmode(GPIO.BCM)
 #from flask import Flask
 #app = Flask(__name__);
 
 #sensor = BMP085.BMP085(0x60, bus=SMBus(1), mode = BMP085.BMP085_STANDARD);
-sensor = BMP085.BMP085();
+#sensor = BMP085.BMP085();
 
 db = MySQLdb.connect(host='45.55.180.111:3306',user='peyton',passwd='toor',db='weather');
 curs = db.cursor();
@@ -65,12 +65,12 @@ def readadc(adcnum, clockpin, mosipin, misopin, cspin):
         return adcout
 
 def getTemp():
-    #readout = bus.read_byte(address)
-    #print(readout)
-    #if readout>=128:
-    #    readout=(readout-128)*-1
-    #return readout
-    cel = sensor.read_temperature();
+    readout = bus.read_byte(address)
+    print(readout)
+    if readout>=128:
+        readout=(readout-128)*-1
+    cel = readout
+    #cel = sensor.read_temperature();
     fah = cel*1.8+32
     return fah;
 
@@ -88,8 +88,8 @@ def loopedFunction():
 
     with db:
         alpha = getTemp()
-        b = getWindSpeed()
-        c = getPressure()
+        b = 0#getWindSpeed()
+        c = 0#getPressure()
         query = """INSERT INTO weatherdata values(CURRENT_DATE(),NOW(),{},{},{})""".format(getTemp(),b,c)
         curs.execute (query)
     curs.execute ("SELECT * FROM weatherdata ORDER BY tdate,ttime DESC LIMIT 1")
