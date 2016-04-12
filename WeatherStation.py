@@ -29,6 +29,7 @@ GPIO.setup(SPIMOSI, GPIO.OUT)
 GPIO.setup(SPIMISO, GPIO.IN)
 GPIO.setup(SPICLK, GPIO.OUT)
 GPIO.setup(SPICS, GPIO.OUT)
+GPIO.setup(17,GPIO.OUT)
 
 def readadc(adcnum, clockpin, mosipin, misopin, cspin):
         if ((adcnum > 7) or (adcnum < 0)):
@@ -82,21 +83,23 @@ def getPressure():
     return inches;
 def loopedFunction():
     threading.Timer(2.0, loopedFunction).start()
+    GPIO.output(17,false);
 
     #db = MySQLdb.connect(host='45.55.180.111:3306',user='peyton',passwd='toor',db='weather');
     curs = db.cursor()
 
     with db:
-        a = 1# getTemp()
+        a = getTemp()# getTemp()
         b = 0#getWindSpeed()
         c = 0#getPressure()
-	d = 0
+	    d = 0#lightLevel()
         query = """INSERT INTO weatherdata values(CURRENT_DATE(),NOW(),{},{},{},{})""".format(a,b,c,d)
         curs.execute (query)
     curs.execute ("SELECT * FROM weatherdata ORDER BY tddate DESC,ttime DESC LIMIT 1")
 
     for reading in curs.fetchall():
         print str(reading[0])+"    "+str(reading[1])+"    " + str(reading[2])+"    "+str(reading[3])+"    "+str(reading[4])
+    GPIO.output(17,true);
 
     #db.close();
 
