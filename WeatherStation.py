@@ -13,7 +13,7 @@ GPIO.setmode(GPIO.BCM)
 #sensor = BMP085.BMP085(0x60, bus=SMBus(1), mode = BMP085.BMP085_STANDARD);
 #sensor = BMP085.BMP085();
 
-db = MySQLdb.connect(host='45.55.180.111:3306',user='peyton',passwd='toor',db='weather');
+db = MySQLdb.connect(host='45.55.180.111',user='peyton',passwd='toor',db='weather');
 curs = db.cursor();
 
 bus = smbus.SMBus(1)
@@ -83,21 +83,22 @@ def getPressure():
 def loopedFunction():
     threading.Timer(2.0, loopedFunction).start()
 
-    db = MySQLdb.connect(host='45.55.180.111:3306',user='peyton',passwd='toor',db='weather');
+    #db = MySQLdb.connect(host='45.55.180.111:3306',user='peyton',passwd='toor',db='weather');
     curs = db.cursor()
 
     with db:
-        alpha = getTemp()
+        a = 1# getTemp()
         b = 0#getWindSpeed()
         c = 0#getPressure()
-        query = """INSERT INTO weatherdata values(CURRENT_DATE(),NOW(),{},{},{})""".format(getTemp(),b,c)
+	d = 0
+        query = """INSERT INTO weatherdata values(CURRENT_DATE(),NOW(),{},{},{},{})""".format(a,b,c,d)
         curs.execute (query)
-    curs.execute ("SELECT * FROM weatherdata ORDER BY tdate,ttime DESC LIMIT 1")
+    curs.execute ("SELECT * FROM weatherdata ORDER BY tddate DESC,ttime DESC LIMIT 1")
 
     for reading in curs.fetchall():
         print str(reading[0])+"    "+str(reading[1])+"    " + str(reading[2])+"    "+str(reading[3])+"    "+str(reading[4])
 
-    db.close();
+    #db.close();
 
 
 #@app.route('/')
@@ -109,4 +110,4 @@ def loopedFunction():
 
 
 loopedFunction()
-db.close();
+#db.close();
