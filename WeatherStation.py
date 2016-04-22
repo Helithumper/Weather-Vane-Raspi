@@ -24,6 +24,8 @@ SPIMISO = 23
 SPIMOSI = 24
 SPICS = 25
 
+anemometer_pin = 0;
+
 # set up the SPI interface pins
 GPIO.setup(SPIMOSI, GPIO.OUT)
 GPIO.setup(SPIMISO, GPIO.IN)
@@ -64,7 +66,6 @@ def readadc(adcnum, clockpin, mosipin, misopin, cspin):
 
         adcout >>= 1       # first bit is 'null' so drop it
         return adcout
-
 def getTemp():
     readout = bus.read_byte(address)
     print(readout)
@@ -76,11 +77,23 @@ def getTemp():
     return fah;
 
 def getWindSpeed():
-    return 0;
+    anemometer = readadc(anemometer_pin, SPICLK, SPIMOSI, SPIMISO, SPICS) - 123
+    speed = translate(anemometer, 0, 256, 0, 33);
+    return speed;
 def getPressure():
     pas = sensor.read_pressure();
     inches = pas * 0.0002953;
     return inches;
+def translate(value, leftMin, leftMax, rightMin, rightMax):
+    # Figure out how 'wide' each range is
+    leftSpan = leftMax - leftMin
+    rightSpan = rightMax - rightMin
+
+    # Convert the left range into a 0-1 range (float)
+    valueScaled = float(value - leftMin) / float(leftSpan)
+
+    # Convert the 0-1 range into a value in the right range.
+    return rightMin + (valueScaled * rightSpan)
 def loopedFunction():
     threading.Timer(2.0, loopedFunction).start()
     GPIO.output(17,GPIO.FALSE);
@@ -90,7 +103,7 @@ def loopedFunction():
 
     with db:
         a = getTemp()# getTemp()
-        b = 0#getWindSpeed()
+        b= getWindSpeed()
         c = 0#getPressure()
 	    d = 0#lightLevel()
         query = """INSERT INTO weatherdata values(CURRENT_DATE(),NOW(),{},{},{},{})""".format(a,b,c,d)
