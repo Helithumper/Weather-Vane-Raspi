@@ -96,7 +96,7 @@ def translate(value, leftMin, leftMax, rightMin, rightMax):
     return rightMin + (valueScaled * rightSpan)
 def loopedFunction():
     threading.Timer(2.0, loopedFunction).start()
-    GPIO.output(17,GPIO.FALSE);
+    GPIO.output(17,False);
 
     #db = MySQLdb.connect(host='45.55.180.111:3306',user='peyton',passwd='toor',db='weather');
     curs = db.cursor()
@@ -112,7 +112,7 @@ def loopedFunction():
 
     for reading in curs.fetchall():
         print str(reading[0])+"    "+str(reading[1])+"    " + str(reading[2])+"    "+str(reading[3])+"    "+str(reading[4])
-    GPIO.output(17,GPIO.HIGH);
+    GPIO.output(17,True);
 
     #db.close();
 
