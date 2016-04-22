@@ -24,7 +24,7 @@ SPIMISO = 23
 SPIMOSI = 24
 SPICS = 25
 
-anemometer_pin = 0;
+ane_pin = 0;
 
 # set up the SPI interface pins
 GPIO.setup(SPIMOSI, GPIO.OUT)
@@ -66,6 +66,7 @@ def readadc(adcnum, clockpin, mosipin, misopin, cspin):
 
         adcout >>= 1       # first bit is 'null' so drop it
         return adcout
+
 def getTemp():
     readout = bus.read_byte(address)
     print(readout)
@@ -77,7 +78,7 @@ def getTemp():
     return fah;
 
 def getWindSpeed():
-    anemometer = readadc(anemometer_pin, SPICLK, SPIMOSI, SPIMISO, SPICS) - 123
+    anemometer = readadc(ane_pin, SPICLK, SPIMOSI, SPIMISO, SPICS) - 123
     speed = translate(anemometer, 0, 256, 0, 33);
     return speed;
 def getPressure():
