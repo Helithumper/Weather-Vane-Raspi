@@ -85,6 +85,10 @@ def getPressure():
     pas = sensor.read_pressure();
     inches = pas * 0.0002953;
     return inches;
+def getLightSensor():
+    adc_value = readadc(Photo_Sensor, SPICLK, SPIMOSI, SPIMISO, SPICS)
+    Percent = translate(adc_value, 0, 1024, 0, 100)
+    return Percent;
 def translate(value, leftMin, leftMax, rightMin, rightMax):
     # Figure out how 'wide' each range is
     leftSpan = leftMax - leftMin
@@ -105,9 +109,9 @@ def loopedFunction():
     with db:
         a = getTemp()# getTemp()
         b= getWindSpeed()
-        c = 0#getPressure()
-        d = 0#lightLevel()
-        query = """INSERT INTO weatherdata values(CURRENT_DATE(),NOW(),{},{},{},{})""".format(a,b,c,d)
+        c = getLightSensor();
+        #d = 0#lightLevel()
+        query = """INSERT INTO weatherdata values(CURRENT_DATE(),NOW(),{},{},{})""".format(a,b,c)
         curs.execute (query)
     curs.execute ("SELECT * FROM weatherdata ORDER BY tddate DESC,ttime DESC LIMIT 1")
 
