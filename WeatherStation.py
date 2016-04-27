@@ -87,7 +87,7 @@ def getPressure():
     inches = pas * 0.0002953;
     return inches;
 def getLightSensor():
-    adc_value = readadc(1, SPICLK, SPIMOSI, SPIMISO, SPICS)
+    adc_value = abs(readadc(1, SPICLK, SPIMOSI, SPIMISO, SPICS))
     Percent = translate(adc_value, 0, 1024, 0, 100)
     return Percent;
 def translate(value, leftMin, leftMax, rightMin, rightMax):
