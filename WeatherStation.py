@@ -111,7 +111,7 @@ def loopedFunction():
         b= getWindSpeed()
         c = getLightSensor();
         #d = 0#lightLevel()
-        query = """INSERT INTO weatherdata values(CURRENT_DATE(),NOW(),{},{},{})""".format(a,b,c)
+        query = """INSERT INTO weatherdata (tdate,ttime,temp,windspeed,sunlight) values(CURRENT_DATE(),NOW(),{},{},{})""".format(a,b,c)
         curs.execute (query)
     curs.execute ("SELECT * FROM weatherdata ORDER BY tddate DESC,ttime DESC LIMIT 1")
 
