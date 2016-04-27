@@ -113,7 +113,7 @@ def loopedFunction():
         #d = 0#lightLevel()
         query = """INSERT INTO weatherdata (tdate,ttime,temp,windspeed,sunlight) values(CURRENT_DATE(),NOW(),{},{},{})""".format(a,b,c)
         curs.execute (query)
-    curs.execute ("SELECT * FROM weatherdata ORDER BY tddate DESC,ttime DESC LIMIT 1")
+    curs.execute ("SELECT * FROM weatherdata ORDER BY tdate DESC,ttime DESC LIMIT 1")
 
     for reading in curs.fetchall():
         print str(reading[0])+"    "+str(reading[1])+"    " + str(reading[2])+"    "+str(reading[3])+"    "+str(reading[4])
