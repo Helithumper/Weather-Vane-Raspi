@@ -123,6 +123,7 @@ def getPressure():
 
     pressure = (p_msb << 10) | (p_csb << 2) | (p_lsb >> 6)
     p_decimal = ((p_lsb & 0x30) >> 4)/4.0
+    print p_decimal;
 
 
 
