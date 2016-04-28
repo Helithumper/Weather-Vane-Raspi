@@ -31,9 +31,7 @@ if (setting & 0x02) == 0:
 
 # Read sensor data
 print "Waiting for data..."
-status = bus.read_byte_data(ADDR,0x00)
 while (status & 0x08) == 0:
-    #print bin(status)
     status = bus.read_byte_data(ADDR,0x00)
     #time.sleep(0.5)
 
