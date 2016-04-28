@@ -130,7 +130,7 @@ def getPressure():
 
 
     #print "Pressure and Temperature at "+time.strftime('%m/%d/%Y %H:%M:%S%z')
-    return str(pressure+p_decimal);
+    return pressure+p_decimal;
     #print str(celsius)+deg+"C"
     #print str(fahrenheit)+deg+"F"
 def getLightSensor():
