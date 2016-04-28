@@ -35,7 +35,7 @@ status = bus.read_byte_data(ADDR,0x00)
 while (status & 0x08) == 0:
     #print bin(status)
     status = bus.read_byte_data(ADDR,0x00)
-    time.sleep(0.5)
+    #time.sleep(0.5)
 
 print "Reading sensor data..."
 p_data = bus.read_i2c_block_data(ADDR,0x01,3)

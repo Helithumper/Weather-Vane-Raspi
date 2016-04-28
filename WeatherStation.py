@@ -106,11 +106,11 @@ def getWindSpeed():
     speed = translate(anemometer, 0, 256, 0, 33);
     return speed;
 def getPressure():
-    status = bus.read_byte_data(ADDR,0x00)
-    while (status & 0x08) == 0:
+    #status = bus.read_byte_data(ADDR,0x00)
+    #while (status & 0x08) == 0:
         #print bin(status)
-        status = bus.read_byte_data(ADDR,0x00)
-    
+        #status = bus.read_byte_data(ADDR,0x00)
+
     p_data = bus.read_i2c_block_data(ADDR,0x01,3)
     t_data = bus.read_i2c_block_data(ADDR,0x04,2)
     status = bus.read_byte_data(ADDR,0x00)
