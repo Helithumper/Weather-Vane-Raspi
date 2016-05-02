@@ -13,7 +13,7 @@ GPIO.setmode(GPIO.BCM)
 #sensor = BMP085.BMP085(0x60, bus=SMBus(1), mode = BMP085.BMP085_STANDARD);
 #sensor = BMP085.BMP085();
 
-db = MySQLdb.connect(host='45.55.180.111',user='peyton',passwd='toor',db='weather');
+db = MySQLdb.connect(host='45.55.180.111',user='peyton',passwd='password',db='weather');
 curs = db.cursor();
 
 bus = smbus.SMBus(1)
