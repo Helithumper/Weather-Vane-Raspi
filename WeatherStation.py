@@ -38,9 +38,9 @@ CTRL_REG1 = 0x26
 PT_DATA_CFG = 0x13
 
 who_am_i = bus.read_byte_data(ADDR, 0x0C)
-print hex(who_am_i)
+print("BAROMETER ADDRESS: ",hex(who_am_i));
 if who_am_i != 0xc4:
-    print "Device not active."
+    print "DEVICE NOT ACTIVE"
     exit(1)
 
 setting = bus.read_byte_data(ADDR, CTRL_REG1)
@@ -54,8 +54,6 @@ bus.write_byte_data(ADDR, PT_DATA_CFG, 0x07)
 setting = bus.read_byte_data(ADDR, CTRL_REG1)
 if (setting & 0x02) == 0:
     bus.write_byte_data(ADDR, CTRL_REG1, (setting | 0x02))
-
-gc.enable();
 
 def readadc(adcnum, clockpin, mosipin, misopin, cspin):
         if ((adcnum > 7) or (adcnum < 0)):
@@ -150,6 +148,7 @@ def translate(value, leftMin, leftMax, rightMin, rightMax):
     # Convert the 0-1 range into a value in the right range.
     return rightMin + (valueScaled * rightSpan)
 def loopedFunction():
+    db.ping(True);
     threading.Timer(2.0, loopedFunction).start()
     GPIO.output(17,False);
 
@@ -157,7 +156,7 @@ def loopedFunction():
     curs = db.cursor()
 
     with db:
-        a = getTemp()# getTemp()
+        a = getTemp()
         b= getWindSpeed();
         c = getLightSensor();
         d = getPressure();
@@ -168,7 +167,6 @@ def loopedFunction():
     for reading in curs.fetchall():
         print str(reading[0])+"    "+str(reading[1])+"    " + str(reading[2])+"    "+str(reading[3])+"    "+str(reading[4])
     GPIO.output(17,True);
-    gc.collect();
 
 loopedFunction()
 #db.close();
