@@ -152,7 +152,7 @@ def loopedFunction():
     threading.Timer(2.0, loopedFunction).start()
     GPIO.output(17,False);
 
-    #db = MySQLdb.connect(host='45.55.180.111:3306',user='peyton',passwd='toor',db='weather');
+    db = MySQLdb.connect(host='45.55.180.111:3306',user='peyton',passwd='toor',db='weather');
     curs = db.cursor()
 
     with db:
@@ -162,11 +162,10 @@ def loopedFunction():
         d = getPressure();
         query = """INSERT INTO weatherdata (tdate,ttime,temp,windspeed,sunlight) values(CURRENT_DATE(),NOW(),{},{},{})""".format(a,b,c)
         curs.execute (query)
-        print CURRENT_DATE()+"|"+NOW()+"|"+a+"|"+b+"|"+c+"|"+d+"|";
-        print "------------------------------------"
-    #curs.execute ("SELECT * FROM weatherdata ORDER BY tdate DESC,ttime DESC LIMIT 1")
+    curs.execute ("SELECT * FROM weatherdata ORDER BY tdate DESC,ttime DESC LIMIT 1")
 
-
+    for reading in curs.fetchall():
+        print str(reading[0])+"|"+str(reading[1])+"|" + str(reading[2])+"|"+str(reading[3])+"|"+str(reading[4])
     GPIO.output(17,True);
 
 loopedFunction()
