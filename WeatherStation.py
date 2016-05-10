@@ -166,6 +166,7 @@ def loopedFunction():
 
     for reading in curs.fetchall():
         print str(reading[0])+"|"+str(reading[1])+"|" + str(reading[2])+"|"+str(reading[3])+"|"+str(reading[4])
+        print "------------------------------------"
     GPIO.output(17,True);
 
 loopedFunction()
