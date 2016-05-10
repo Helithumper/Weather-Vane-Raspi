@@ -55,6 +55,7 @@ setting = bus.read_byte_data(ADDR, CTRL_REG1)
 if (setting & 0x02) == 0:
     bus.write_byte_data(ADDR, CTRL_REG1, (setting | 0x02))
 
+gc.enable();
 
 def readadc(adcnum, clockpin, mosipin, misopin, cspin):
         if ((adcnum > 7) or (adcnum < 0)):
@@ -168,17 +169,6 @@ def loopedFunction():
         print str(reading[0])+"    "+str(reading[1])+"    " + str(reading[2])+"    "+str(reading[3])+"    "+str(reading[4])
     GPIO.output(17,True);
     gc.collect();
-
-    #db.close();
-
-
-#@app.route('/')
-#def index():
-#    return strftime("%a, %d %b %Y %H:%M:%S",gmtime())
-#
-#if __name__ == '__main__':
-#    app.run(debug=True,host='0.0.0.0')
-
 
 loopedFunction()
 #db.close();
