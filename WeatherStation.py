@@ -169,8 +169,10 @@ def loopedFunction():
         print str(reading[0])+"|"+str(reading[1])+"|" + str(reading[2])+"|"+str(reading[3])+"|"+str(reading[4])
     GPIO.output(17,True);
 
+def baroFunction():
+    threading.Timer(10,baroFunction).start();
+    print getPressure();
 loopedFunction()
-while(True):
-    print("TRUE")
+baroFunction()
 
 #db.close();
