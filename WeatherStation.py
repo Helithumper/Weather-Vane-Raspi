@@ -170,7 +170,7 @@ def loopedFunction():
     GPIO.output(17,True);
 
 loopedFunction()
-while(True){
+while(True):
     print("TRUE")
-}
+
 #db.close();
