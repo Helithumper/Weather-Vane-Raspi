@@ -162,7 +162,7 @@ def loopedFunction():
         d = getPressure();
         query = """INSERT INTO weatherdata (tdate,ttime,temp,windspeed,sunlight) values(CURRENT_DATE(),NOW(),{},{},{})""".format(a,b,c)
         curs.execute (query)
-        print CURRENT_DATE()+"|"+NOW()+"|"a+"|"+b+"|"+c+"|"+d+"|";
+        print CURRENT_DATE()+"|"+NOW()+"|"+a+"|"+b+"|"+c+"|"+d+"|";
         print "------------------------------------"
     curs.execute ("SELECT * FROM weatherdata ORDER BY tdate DESC,ttime DESC LIMIT 1")
 
