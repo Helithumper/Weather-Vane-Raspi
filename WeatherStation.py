@@ -38,7 +38,7 @@ CTRL_REG1 = 0x26
 PT_DATA_CFG = 0x13
 
 who_am_i = bus.read_byte_data(ADDR, 0x0C)
-print("BAROMETER ADDRESS: ",hex(who_am_i));
+print("BAROMETER ADDRESS: "+hex(who_am_i));
 if who_am_i != 0xc4:
     print "DEVICE NOT ACTIVE"
     exit(1)
@@ -91,7 +91,7 @@ def readadc(adcnum, clockpin, mosipin, misopin, cspin):
 
 def getTemp():
     readout = bus.read_byte(address)
-    print(readout)
+    #print(readout)
     if readout>=128:
         readout=(readout-128)*-1
     cel = readout
@@ -124,7 +124,7 @@ def getPressure():
 
     pressure = (p_msb << 10) | (p_csb << 2) | (p_lsb >> 6)
     p_decimal = ((p_lsb & 0x30) >> 4)/4.0
-    print p_decimal;
+    #print p_decimal;
 
 
 
@@ -135,7 +135,7 @@ def getPressure():
 def getLightSensor():
     adc_value = abs(readadc(1, SPICLK, SPIMOSI, SPIMISO, SPICS))
     Percent = translate(adc_value, 0, 1024, 0, 100)
-    print("PERCENT:", Percent)
+    #print("PERCENT:", Percent)
     return Percent;
 def translate(value, leftMin, leftMax, rightMin, rightMax):
     # Figure out how 'wide' each range is
@@ -165,7 +165,7 @@ def loopedFunction():
     curs.execute ("SELECT * FROM weatherdata ORDER BY tdate DESC,ttime DESC LIMIT 1")
 
     for reading in curs.fetchall():
-        print str(reading[0])+"    "+str(reading[1])+"    " + str(reading[2])+"    "+str(reading[3])+"    "+str(reading[4])
+        print str(reading[0])+"|"+str(reading[1])+"|" + str(reading[2])+"|"+str(reading[3])+"|"+str(reading[4])
     GPIO.output(17,True);
 
 loopedFunction()
