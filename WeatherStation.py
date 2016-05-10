@@ -170,4 +170,5 @@ def loopedFunction():
     GPIO.output(17,True);
 
 loopedFunction()
+print("TEST");
 #db.close();
