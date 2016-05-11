@@ -101,8 +101,8 @@ def getTemp():
 
 def getWindSpeed():
     anemometer = readadc(ane_pin, SPICLK, SPIMOSI, SPIMISO, SPICS) - 123
-    anemometer=abs(anemometer);
-    speed = translate(anemometer, 0, 256, 0, 33);
+    anemometer=abs(anemometer-80);
+    speed = translate(anemometer, 0, 64, 0, 32);
     return speed;
 def getPressure():
 
