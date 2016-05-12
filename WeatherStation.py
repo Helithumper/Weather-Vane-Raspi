@@ -105,12 +105,30 @@ def getWindSpeed():
     speed = translate(anemometer, 0, 64, 0, 32);
     return speed;
 def getPressure():
+    # I2C Constants
+    ADDR = 0x60
+    CTRL_REG1 = 0x26
+    PT_DATA_CFG = 0x13
+    bus = SMBus(1)
 
-    status = bus.read_byte_data(ADDR,0x00)
+    who_am_i = bus.read_byte_data(ADDR, 0x0C)
+    #print hex(who_am_i)
+    if who_am_i != 0xc4:
+        #print "Device not active."
+        #exit(1)
+
+    # Set oversample rate to 128
+    setting = bus.read_byte_data(ADDR, CTRL_REG1)
+    newSetting = setting | 0x38
+    bus.write_byte_data(ADDR, CTRL_REG1, newSetting)
+
+    # Enable event flags
+    bus.write_byte_data(ADDR, PT_DATA_CFG, 0x07)
     #status = bus.read_byte_data(ADDR,0x00)
-    #while (status & 0x08) == 0:
+    #status = bus.read_byte_data(ADDR,0x00)
+    while (status & 0x08) == 0:
         #print bin(status)
-        #status = bus.read_byte_data(ADDR,0x00)
+        status = bus.read_byte_data(ADDR,0x00)
 
     p_data = bus.read_i2c_block_data(ADDR,0x01,3)
     t_data = bus.read_i2c_block_data(ADDR,0x04,2)
