@@ -126,9 +126,7 @@ def getPressure():
     bus.write_byte_data(ADDR, PT_DATA_CFG, 0x07)
     #status = bus.read_byte_data(ADDR,0x00)
     #status = bus.read_byte_data(ADDR,0x00)
-    while (status & 0x08) == 0:
-        #print bin(status)
-        status = bus.read_byte_data(ADDR,0x00)
+
 
     p_data = bus.read_i2c_block_data(ADDR,0x01,3)
     t_data = bus.read_i2c_block_data(ADDR,0x04,2)
@@ -178,7 +176,7 @@ def loopedFunction():
         a = getTemp()
         b= getWindSpeed();
         c = getLightSensor();
-        d = getPressure();
+        #d = getPressure();
         query = """INSERT INTO weatherdata (tdate,ttime,temp,windspeed,sunlight) values(CURRENT_DATE(),NOW(),{},{},{})""".format(a,b,c)
         curs.execute (query)
     curs.execute ("SELECT * FROM weatherdata ORDER BY tdate DESC,ttime DESC LIMIT 1")
