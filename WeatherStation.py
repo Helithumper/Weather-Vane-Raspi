@@ -114,7 +114,7 @@ def getPressure():
     who_am_i = bus.read_byte_data(ADDR, 0x0C)
     #print hex(who_am_i)
     if who_am_i != 0xc4:
-        #print "Device not active."
+        print "Device not active."
         #exit(1)
 
     # Set oversample rate to 128
