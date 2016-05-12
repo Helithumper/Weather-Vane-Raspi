@@ -125,7 +125,7 @@ def getPressure():
     # Enable event flags
     bus.write_byte_data(ADDR, PT_DATA_CFG, 0x07)
     #status = bus.read_byte_data(ADDR,0x00)
-    status = bus.read_byte_data(ADDR,0x00)
+    #status = bus.read_byte_data(ADDR,0x00)
     while (status & 0x08) == 0:
         #print bin(status)
         status = bus.read_byte_data(ADDR,0x00)
