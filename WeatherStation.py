@@ -156,6 +156,8 @@ def getPressure():
     p_msb = p_data[0]
     p_csb = p_data[1]
     p_lsb = p_data[2]
+    t_msb = t_data[0]
+    t_lsb = t_data[1]
 
     pressure = (p_msb << 10) | (p_csb << 2) | (p_lsb >> 6)
     p_decimal = ((p_lsb & 0x30) >> 4)/4.0
@@ -192,7 +194,7 @@ def loopedFunction():
     db.close();
 
 def baroFunction():
-    threading.Timer(10,baroFunction).start();
+    threading.Timer(20,baroFunction).start();
     db = MySQLdb.connect(host='45.55.180.111',user='peyton',passwd='password',db='weather');
     db.ping(True);
     curs = db.cursor()
@@ -205,7 +207,6 @@ def baroFunction():
 
     for reading in curs.fetchall():
         print str(reading[0])+"|"+str(reading[1])+"|" + str(reading[2])
-
     db.close();
 
 loopedFunction()
