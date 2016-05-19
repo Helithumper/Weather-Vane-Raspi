@@ -100,9 +100,14 @@ def getTemp():
     return fah;
 
 def getWindSpeed():
-    anemometer = readadc(ane_pin, SPICLK, SPIMOSI, SPIMISO, SPICS) - 123
-    anemometer=abs(anemometer-140);
-    speed = translate(anemometer, 0, 64, 0, 32);
+    #anemometer = readadc(ane_pin, SPICLK, SPIMOSI, SPIMISO, SPICS) - 123
+    #anemometer=abs(anemometer-140);
+    #speed = translate(anemometer, 0, 64, 0, 32);
+    #return speed;
+    trim_pot = readadc(potentiometer_adc, SPICLK, SPIMOSI, SPIMISO, SPICS) - 123
+    # how much has it changed since the last read?
+    #  pot_adjust = abs(trim_pot - last_read)
+    speed = translate(trim_pot, 0, 256, 0, 33)
     return speed;
 #def getPressure():
     # I2C Constants
