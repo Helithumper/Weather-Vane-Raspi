@@ -170,14 +170,14 @@ def baroFunction():
     curs = db.cursor()
 
     with db:
-        a = 20#getPressure()
+        a = getPressure()
         query = """INSERT INTO barometer (tdate,ttime,pressure) values(CURRENT_DATE(),NOW(),{})""".format(a)
         curs.execute (query)
     curs.execute ("SELECT * FROM barometer ORDER BY tdate DESC,ttime DESC LIMIT 1")
 
     for reading in curs.fetchall():
         print str(reading[0])+"|"+str(reading[1])+"|" + str(reading[2])
-    print getPressure();
+
     db.close();
 
 loopedFunction()
