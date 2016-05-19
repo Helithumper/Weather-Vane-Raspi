@@ -107,4 +107,4 @@ while True:
                 #last_read = trim_pot
 
         # hang out and do nothing for a half second
-        time.sleep(1)
+        #time.sleep(1)
