@@ -146,7 +146,7 @@ def getPressure():
     setting = bus.read_byte_data(ADDR, CTRL_REG1)
     if (setting & 0x02) == 0:
         bus.write_byte_data(ADDR, CTRL_REG1, (setting | 0x02))
-    status = -1;
+    status = null;
     while (status & 0x08) == 0:
         status = bus.read_byte_data(ADDR,0x00)
         time.sleep(.5);
