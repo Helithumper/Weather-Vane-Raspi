@@ -121,16 +121,23 @@ def getWindSpeed():
     print(abs(speed))
     print("#######")
     return abs(speed);
-    #def getPressure():
+def getPressure():
     # I2C Constants
     # I2C Constants
-    #ADDR = 0x60
-    #CTRL_REG1 = 0x26
-    #PT_DATA_CFG = 0x13
-    #bus = SMBus(1)
+    ADDR = 0x60
+    CTRL_REG1 = 0x26
+    PT_DATA_CFG = 0x13
+    bus = SMBus(1)
+
+    p_msb = p_data[0]
+    p_csb = p_data[1]
+    p_lsb = p_data[2]
+
+    pressure = (p_msb << 10) | (p_csb << 2) | (p_lsb >> 6)
+    p_decimal = ((p_lsb & 0x30) >> 4)/4.0
 
     #print "Pressure and Temperature at "+time.strftime('%m/%d/%Y %H:%M:%S%z')
-    #return pressure+p_decimal
+    return pressure+p_decimal
 
     #print str(celsius)+deg+"C"
     #print str(fahrenheit)+deg+"F"
