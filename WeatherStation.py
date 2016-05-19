@@ -108,11 +108,11 @@ def getWindSpeed():
     # how much has it changed since the last read?
     #  pot_adjust = abs(trim_pot - last_read)
     speed = translate(trim_pot, 0, 256, 0, 33)
-    return abs(speed);
     print("#########")
     print(abs(speed))
     print("#######")
-#def getPressure():
+    return abs(speed);
+    #def getPressure():
     # I2C Constants
     # I2C Constants
     #ADDR = 0x60
