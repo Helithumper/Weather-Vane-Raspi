@@ -98,7 +98,16 @@ def getTemp():
     #cel = sensor.read_temperature();
     fah = cel*1.8+32
     return fah;
+def translate(value, leftMin, leftMax, rightMin, rightMax):
+    # Figure out how 'wide' each range is
+    leftSpan = leftMax - leftMin
+    rightSpan = rightMax - rightMin
 
+    # Convert the left range into a 0-1 range (float)
+    valueScaled = float(value - leftMin) / float(leftSpan)
+
+    # Convert the 0-1 range into a value in the right range.
+    return rightMin + (valueScaled * rightSpan)
 def getWindSpeed():
     #anemometer = readadc(ane_pin, SPICLK, SPIMOSI, SPIMISO, SPICS) - 123
     #anemometer=abs(anemometer-140);
@@ -130,16 +139,7 @@ def getLightSensor():
     Percent = translate(adc_value, 0, 1024, 0, 100)
     #print("PERCENT:", Percent)
     return Percent;
-def translate(value, leftMin, leftMax, rightMin, rightMax):
-    # Figure out how 'wide' each range is
-    leftSpan = leftMax - leftMin
-    rightSpan = rightMax - rightMin
 
-    # Convert the left range into a 0-1 range (float)
-    valueScaled = float(value - leftMin) / float(leftSpan)
-
-    # Convert the 0-1 range into a value in the right range.
-    return rightMin + (valueScaled * rightSpan)
 def loopedFunction():
 
     threading.Timer(2.0, loopedFunction).start()
