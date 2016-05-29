@@ -175,8 +175,9 @@ def getLightSensor():
     return Percent;
 
 def loopedFunction():
-
+    print("RUNNING LOOPED FUNCTION!");
     threading.Timer(5.0, loopedFunction).start()
+    print("RUNNING LOOPED FUNCTION! AGAIN!");
     GPIO.output(17,False);
 
     db = MySQLdb.connect(host='45.55.180.111',user='peyton',passwd='password',db='weather');
