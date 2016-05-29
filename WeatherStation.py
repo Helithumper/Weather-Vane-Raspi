@@ -117,9 +117,9 @@ def getWindSpeed():
     # how much has it changed since the last read?
     #  pot_adjust = abs(trim_pot - last_read)
     speed = translate(trim_pot, 0, 256, 0, 33)
-    print("#########")
-    print(abs(speed))
-    print("#######")
+    #print("#########")
+    #print(abs(speed))
+    #print("#######")
     return abs(speed);
 def getPressure():
     # I2C Constants
@@ -193,7 +193,8 @@ def loopedFunction():
     curs.execute ("SELECT * FROM weatherdata ORDER BY tdate DESC,ttime DESC LIMIT 1")
 
     for reading in curs.fetchall():
-        print str(reading[0])+"|"+str(reading[1])+"|" + str(reading[2])+"|"+str(reading[3])+"|"+str(reading[4])
+        print "Going to Weatherdata: " + str(reading[0]);
+        print str(reading[1])+"|"+str(reading[2])+"|" + str(reading[3])+"|"+str(reading[4]) +"|"+str(reading[5]);
     GPIO.output(17,True);
     db.close();
 
@@ -210,7 +211,8 @@ def baroFunction():
     curs.execute ("SELECT * FROM barometer ORDER BY tdate DESC,ttime DESC LIMIT 1")
 
     for reading in curs.fetchall():
-        print str(reading[0])+"|"+str(reading[1])+"|" + str(reading[2])
+        print "Going to Barometer: " + str(reading[0]);
+        print str(reading[1])+"|"+str(reading[2])+"|" + str(reading[3])
     db.close();
 
 loopedFunction()
