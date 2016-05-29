@@ -176,7 +176,7 @@ def getLightSensor():
 
 def loopedFunction():
 
-    threading.Timer(2.0, loopedFunction).start()
+    threading.Timer(5.0, loopedFunction).start()
     GPIO.output(17,False);
 
     db = MySQLdb.connect(host='45.55.180.111',user='peyton',passwd='password',db='weather');
