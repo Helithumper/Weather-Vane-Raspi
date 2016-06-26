@@ -13,7 +13,9 @@ GPIO.setmode(GPIO.BCM)
 #sensor = BMP085.BMP085(0x60, bus=SMBus(1), mode = BMP085.BMP085_STANDARD);
 #sensor = BMP085.BMP085();
 
-db = MySQLdb.connect(host='45.55.180.111',user='peyton',passwd='password',db='weather');
+serverargs[] = {'104.131.97.81','peyton','password','weather'};
+
+db = MySQLdb.connect(host=serverargs[0],user=serverargs[1],passwd=serverargs[2],db=serverargs[3]);
 curs = db.cursor();
 
 bus = SMBus(1)
@@ -180,7 +182,7 @@ def loopedFunction():
     print("RUNNING LOOPED FUNCTION! AGAIN!");
     GPIO.output(17,False);
 
-    db = MySQLdb.connect(host='45.55.180.111',user='peyton',passwd='password',db='weather');
+    db = MySQLdb.connect(host=serverargs[0],user=serverargs[1],passwd=serverargs[2],db=serverargs[3]);
     db.ping(True);
     curs = db.cursor()
 
@@ -201,7 +203,7 @@ def loopedFunction():
 
 def baroFunction():
     threading.Timer(20,baroFunction).start();
-    db = MySQLdb.connect(host='45.55.180.111',user='peyton',passwd='password',db='weather');
+    db = MySQLdb.connect(host=serverargs[0],user=serverargs[1],passwd=serverargs[2],db=serverargs[3]);
     db.ping(True);
     curs = db.cursor()
 
