@@ -2,6 +2,8 @@
 #import os
 import RPi.GPIO as GPIO
 
+#This is an analog test!
+
 GPIO.setmode(GPIO.BCM)
 DEBUG = 1
 
