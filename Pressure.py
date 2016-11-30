@@ -1,6 +1,8 @@
 from smbus import SMBus
 import time
 
+//Comment
+
 # Special Chars
 deg = u'\N{DEGREE SIGN}'
 
